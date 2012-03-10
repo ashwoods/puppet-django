@@ -25,11 +25,14 @@
 #   include django
 # }
 class django {
-    class { 'stdlib': }
+    if !defined(Class['stdlib']) {
+        class { 'stdlib': }
+    }
 
     if !defined(Pythonbrew::Version['2.7.2']) {
         pythonbrew::version {'2.7.2':
             user => 'root',
+        }
     }
 
     # Allow the end user to establish relationships to the "main" class
