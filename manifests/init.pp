@@ -43,7 +43,7 @@ class django {
         #notify => Class['django::service'],
       }
 
-    anchor { 'nginx::end':
+    anchor { 'django::end':
         #require => Class['django::service'],
     }
 
