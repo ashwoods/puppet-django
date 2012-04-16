@@ -11,9 +11,9 @@ define django::resource::virtualenv(
 
   exec {"virtualenv-${name}":
     user => $user,
-    command  => "/usr/local/pythonbrew/pythons/Python-2.7.2/bin/virtualenv ${location}",
+    command  => "virtualenv ${location}",
     creates  => $location,
-    require => Pythonbrew::Version['2.7.2'],
+    require => Package['python-virtualenv'],
   }
 
   exec {"requirements-${name}":

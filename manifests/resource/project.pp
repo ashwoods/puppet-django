@@ -22,4 +22,5 @@ define django::resource::project(
       require => Exec["git-clone-${name}"],
   }
 
+
 }

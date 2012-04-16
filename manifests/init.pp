@@ -29,11 +29,12 @@ class django {
         class { 'stdlib': }
     }
 
-    if !defined(Pythonbrew::Version['2.7.2']) {
-        pythonbrew::version {'2.7.2':
-            user => 'root',
-        }
-    }
+    if !defined(Package['python-virtualenv']) { package {'python-virtualenv': ensure => installed }}
+    if !defined(Package['git-core']) { package {'git-core': ensure => installed }}
+    if !defined(Package['mercurial']) { package {'mercurial': ensure => installed }}
+    if !defined(Package['postgresql-server-dev-9.1'] { package {'postgresql-server-dev-9.1': ensure => installed }}
+    if !defined(Package['build-essential']) { package {'build-essential': ensure => installed }}
+    if !defined(Package['python-dev']) { package {'python-dev': ensure => installed }}
 
     # Allow the end user to establish relationships to the "main" class
     # and preserve the relationship to the implementation classes through
@@ -46,32 +47,4 @@ class django {
     anchor { 'django::end':
         #require => Class['django::service'],
     }
-
-
-    #    exec {"virtualenv":
-    #            user => 'vagrant',
-    #            command  => "/usr/local/pythonbrew/pythons/Python-2.7.2/bin/virtualenv /home/vagrant/.virtualenvs/submitz",
-    #            creates  => "/home/vagrant/.virtualenvs/submitz",
-    #            require => Pythonbrew::Version['2.7.2'],
-    #    }
-
-    #    file { "/home/vagrant/submitz":
-    #            ensure => link,
-    #            target => "/vagrant",
-    #    }
-
-    #    exec {"requirements.pip":
-    #           user => 'vagrant',
-    #           command => "yes w | /home/vagrant/.virtualenvs/submitz/bin/pip install -r /vagrant/stable.pip",
-    #           require => Exec["virtualenv"],
-    #           timeout => "0",
-    #    }
-
-    #    exec {"pip-install-project":
-    #           user => 'vagrant',
-    #           command => "/home/vagrant/.virtualenvs/submitz/bin/pip install -e /vagrant",
-    #           require => Exec['requirements.pip'],
-    #    }
-
-
 }
