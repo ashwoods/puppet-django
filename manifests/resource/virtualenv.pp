@@ -13,15 +13,15 @@ define django::resource::virtualenv(
     user => $user,
     command  => "virtualenv ${location}",
     creates  => $location,
-    require => Package['python-virtualenv'],
+    require => Anchor['django::begin'],
   }
 
   exec {"requirements-${name}":
       user => $user,
       command => "yes w | ${location}/bin/pip install -r ${project}/${requirements}",
-      require => Exec["virtualenv-${name}"],
-               timeout => "0",
-        }
+      require => [Exec["virtualenv-${name}"], Anchor['django::begin']],
+      timeout => "0",
+  }
 
   exec {"pip-install-${name}":
     user => $user,

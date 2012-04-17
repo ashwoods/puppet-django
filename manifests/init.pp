@@ -25,22 +25,19 @@
 #   include django
 # }
 class django {
+
     if !defined(Class['stdlib']) {
         class { 'stdlib': }
     }
 
-    if !defined(Package['python-virtualenv']) { package {'python-virtualenv': ensure => installed }}
-    if !defined(Package['git-core']) { package {'git-core': ensure => installed }}
-    if !defined(Package['mercurial']) { package {'mercurial': ensure => installed }}
-    if !defined(Package['postgresql-server-dev-9.1'] { package {'postgresql-server-dev-9.1': ensure => installed }}
-    if !defined(Package['build-essential']) { package {'build-essential': ensure => installed }}
-    if !defined(Package['python-dev']) { package {'python-dev': ensure => installed }}
+    class {'django::package': }
+
 
     # Allow the end user to establish relationships to the "main" class
     # and preserve the relationship to the implementation classes through
     # a transitive relationship to the composite class.
     anchor{ 'django::begin':
-        #before => Class['django::package'],
+        before => Class['django::package'],
         #notify => Class['django::service'],
       }
 
