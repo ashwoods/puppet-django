@@ -20,6 +20,7 @@ class django::package {
     anchor { 'django::package::end': }
 
     if !defined(Package['python-virtualenv'])         { package {'python-virtualenv': ensure => installed }}
+    if !defined(Package['virtualenvwrapper'])         { package {'virtualenvwrapper': ensure => installed }}
     if !defined(Package['git-core'])                  { package {'git-core': ensure => installed }}
     if !defined(Package['mercurial'])                 { package {'mercurial': ensure => installed }}
     if !defined(Package['postgresql-server-dev-9.1']) { package {'postgresql-server-dev-9.1': ensure => installed }}
