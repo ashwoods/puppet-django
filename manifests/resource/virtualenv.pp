@@ -13,7 +13,7 @@ define django::resource::virtualenv(
     user => $user,
     command  => "virtualenv ${location}",
     creates  => $location,
-    require => Anchor['django::begin'],
+    require => [Anchor['django::begin'],Package['python-virtualenv']],
   }
 
   exec {"requirements-${name}":
