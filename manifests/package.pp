@@ -26,6 +26,6 @@ class django::package {
     if !defined(Package['postgresql-server-dev-9.1']) { package {'postgresql-server-dev-9.1': ensure => installed }}
     if !defined(Package['build-essential'])           { package {'build-essential': ensure => installed }}
     if !defined(Package['python-dev'])                { package {'python-dev': ensure => installed }}
-
+    if !defined(Package['libpq-dev'])                 { package {'libpq-dev': ensure => installed }}
 }
 

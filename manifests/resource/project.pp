@@ -23,4 +23,5 @@ define django::resource::project(
   }
 
 
+
 }
